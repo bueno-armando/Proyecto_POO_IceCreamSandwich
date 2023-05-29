@@ -10,8 +10,7 @@ import java.util.Scanner;
  */
 public class PROYECTO_OOP_BASQUETBOL implements Utilities{
     public static void main(String[] args) {
-        System.out.println(mainMenu());
-        addPlayer();
+        
         
     }
     public static int mainMenu(){
@@ -29,6 +28,7 @@ public class PROYECTO_OOP_BASQUETBOL implements Utilities{
                 switch(x){
                     case 1:
                         menuAddTeam(indiceEquipo);
+                        
                         return x;
                     case 2:
                         System.out.println("VE LA ESTADISTICA");
@@ -100,8 +100,8 @@ public class PROYECTO_OOP_BASQUETBOL implements Utilities{
     public static void addPlayer(){
         Scanner sc = new Scanner(System.in);
         Player [] players = new Player[5];
-        for (int i = 0; i < 5; i++) {
-           
+        for (int i = 0; i < players.length; i++) {
+           //ENTRADA DE DATOS DE JUGADOR
             players[i] = new Player();
             System.out.println("Nombre: ");
             String name =sc.nextLine();
@@ -115,25 +115,28 @@ public class PROYECTO_OOP_BASQUETBOL implements Utilities{
             String position = sc.nextLine();
             players[i].setPosition(position);
             
-           
-            
+          
           boolean validInput=false;
            do{
               try{
                System.out.println("Número: ");
-               int number = sc.nextInt();
-               players[i].setNumber(number);
-               validInput = true;
+                 int number = sc.nextInt();
+                players[i].setNumber(number);
+                 validInput = true;
                }catch(InputMismatchException ex){
-               System.out.println("Entrada de datos incorrecta");
+                  System.out.println("Entrada de datos incorrecta");
                sc.nextLine();
                }
            }while(!validInput);
-             sc.nextLine();
+               sc.nextLine();
              System.out.println("*****************"+"\n");
-         
+ 
         }
      }
+    public static void subMenu() {
+        
+        
+    }
     @Override
     public void time() {
         
