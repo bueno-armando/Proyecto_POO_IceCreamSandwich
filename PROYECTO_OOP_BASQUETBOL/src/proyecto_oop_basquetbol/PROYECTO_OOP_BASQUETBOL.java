@@ -16,7 +16,7 @@ public class PROYECTO_OOP_BASQUETBOL implements Utilities{
     }
     public static int mainMenu(){
         int indiceEquipo=0;
-        boolean salir = true;
+       
         do{
             try{
                 int x;
@@ -64,6 +64,9 @@ public class PROYECTO_OOP_BASQUETBOL implements Utilities{
                         System.out.println("Agregar equipo 1");
                         addTeam(indiceGlobal, numEquipos);
                         indiceGlobal++;
+                        System.out.println("Agregar equipo 2");
+                        addTeam(indiceGlobal, numEquipos);
+                        indiceGlobal++;    
                         return opcSelectTeam;
                     default:
                         System.out.println("Opcion Inexistente");
@@ -73,8 +76,9 @@ public class PROYECTO_OOP_BASQUETBOL implements Utilities{
             catch(InputMismatchException e){
                 System.out.println("Input no valido, intenta de nuevo");
             }
-        }while(true);
-       
+        }while(true);      
+     
+        
     }
     public static void addTeam(int indice, Team[] objEquipo){
         Team CreatedTeam = new Team();//Crear una nueva instancia de Team
@@ -88,7 +92,7 @@ public class PROYECTO_OOP_BASQUETBOL implements Utilities{
         // Asignar el equipo creado al arreglo de equipos en la posición "indice"
         objEquipo[indice]= CreatedTeam;
         System.out.println("Equipo agredado");
-        System.out.println("Nombre del equipo"+objEquipo[indice].getTeamName()+"\n");
+        System.out.println("Nombre del equipo: "+objEquipo[indice].getTeamName()+"\n");
         
         System.out.println("Agregar jugadores");
         addPlayer();
@@ -96,7 +100,8 @@ public class PROYECTO_OOP_BASQUETBOL implements Utilities{
     public static void addPlayer(){
         Scanner sc = new Scanner(System.in);
         Player [] players = new Player[5];
-        for (int i = 0; i < players.length; i++) {
+        for (int i = 0; i < 5; i++) {
+           
             players[i] = new Player();
             System.out.println("Nombre: ");
             String name =sc.nextLine();
@@ -106,15 +111,27 @@ public class PROYECTO_OOP_BASQUETBOL implements Utilities{
             String lastName = sc.nextLine();
             players[i].setLastName(lastName);
             
-            System.out.println("Número: ");
-            int number = sc.nextInt();
-            players[i].setNumber(number);
-            
-            System.out.println("Posición");
+             System.out.println("Posición");
             String position = sc.nextLine();
             players[i].setPosition(position);
-            System.out.println("********************");
             
+           
+            
+          boolean validInput=false;
+           do{
+              try{
+               System.out.println("Número: ");
+               int number = sc.nextInt();
+               players[i].setNumber(number);
+               validInput = true;
+               }catch(InputMismatchException ex){
+               System.out.println("Entrada de datos incorrecta");
+               sc.nextLine();
+               }
+           }while(!validInput);
+             sc.nextLine();
+             System.out.println("*****************"+"\n");
+         
         }
      }
     @Override
