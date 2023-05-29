@@ -10,3 +10,4 @@ public interface PrintInfo {
     //Prints general statistics of a given class
     void printStats();
 }
+

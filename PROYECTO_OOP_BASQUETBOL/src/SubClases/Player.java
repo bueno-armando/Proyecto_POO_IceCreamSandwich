@@ -12,8 +12,8 @@ public class Player extends Persona{
     public Player() {
     }
 
-    public Player(String position, int number, String name, String lastName, int age, String city, String career) {
-        super(name, lastName, age, city, career);
+    public Player(String position, int number, String name, String lastName, int age) {
+        super(name, lastName, age);
         this.position = position;
         this.number = number;
     }

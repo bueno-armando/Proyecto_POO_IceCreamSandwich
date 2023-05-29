@@ -4,7 +4,7 @@ package Entities;
  *
  * @author IceCreamSandwich
  */
-public class Statistics {
+public  abstract class Statistics {
     private int points;
     private int assists;
     private int rebounds;

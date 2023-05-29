@@ -8,23 +8,20 @@ public abstract class Persona {
     private String name;
     private String lastName;
     private int age;
-    private String city;
-    private String career;
+    
 
     public Persona() {
         this.name = "---------";
         this.lastName = "---------";
         this.age = -1;
-        this.city = "---------";
-        this.career = "---------";
+        
     }
 
-    public Persona(String name, String lastName, int age, String city, String career) {
+    public Persona(String name, String lastName, int age) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
-        this.city = city;
-        this.career = career;
+       
     }
 
     public String getName() {
@@ -51,21 +48,7 @@ public abstract class Persona {
         this.age = age;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCareer() {
-        return career;
-    }
-
-    public void setCareer(String career) {
-        this.career = career;
-    }
+   
     
     
 }
