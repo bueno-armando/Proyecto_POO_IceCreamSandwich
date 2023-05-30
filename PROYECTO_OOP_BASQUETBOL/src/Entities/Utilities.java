@@ -3,10 +3,10 @@ package Entities;
 
 /**
  *
- * @author levi-
+ * @author IceCreamSandwich
  */
 public interface Utilities {
-    void time();
+    void timer(int miliseconds);
     void stats();
     void quarter();
     void endGame();

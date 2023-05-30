@@ -3,6 +3,8 @@ import Entities.*;
 import SubClases.Player;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -10,9 +12,50 @@ import java.util.Scanner;
  */
 public class PROYECTO_OOP_BASQUETBOL implements Utilities{
     public static void main(String[] args) {
+        System.out.println(mainMenu());
         
         
     }
+    
+    public static boolean timeOver;
+    
+    public void subMenu(){
+        Scanner sc = new Scanner(System.in);
+        char pick;
+        
+        while(true){
+            pick = sc.next().charAt(0);
+            switch(pick){
+                case '1':
+                    stats();
+                    break;
+                case '2':
+                    //tiempo que va a correr el timer en ms
+                    //ms = minutos*6000
+                    timer(5000);
+                    break;
+                case '3':
+                    quarter();
+                    break;
+                case '4':
+                    endGame();
+                    System.out.println("**********************");
+                    System.out.println("      [MARCADOR]");
+                    System.out.println("**********************");
+                    pick = sc.next().charAt(0);
+                    if(pick == '1'){
+                        //regresar a menú
+                    }
+                    else{
+                        //salir
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    
     public static int mainMenu(){
         int indiceEquipo=0;
        
@@ -28,7 +71,6 @@ public class PROYECTO_OOP_BASQUETBOL implements Utilities{
                 switch(x){
                     case 1:
                         menuAddTeam(indiceEquipo);
-                        
                         return x;
                     case 2:
                         System.out.println("VE LA ESTADISTICA");
@@ -100,8 +142,8 @@ public class PROYECTO_OOP_BASQUETBOL implements Utilities{
     public static void addPlayer(){
         Scanner sc = new Scanner(System.in);
         Player [] players = new Player[5];
-        for (int i = 0; i < players.length; i++) {
-           //ENTRADA DE DATOS DE JUGADOR
+        for (int i = 0; i < 5; i++) {
+           
             players[i] = new Player();
             System.out.println("Nombre: ");
             String name =sc.nextLine();
@@ -115,31 +157,35 @@ public class PROYECTO_OOP_BASQUETBOL implements Utilities{
             String position = sc.nextLine();
             players[i].setPosition(position);
             
-          
+           
+            
           boolean validInput=false;
            do{
               try{
                System.out.println("Número: ");
-                 int number = sc.nextInt();
-                players[i].setNumber(number);
-                 validInput = true;
+               int number = sc.nextInt();
+               players[i].setNumber(number);
+               validInput = true;
                }catch(InputMismatchException ex){
-                  System.out.println("Entrada de datos incorrecta");
+               System.out.println("Entrada de datos incorrecta");
                sc.nextLine();
                }
            }while(!validInput);
-               sc.nextLine();
+             sc.nextLine();
              System.out.println("*****************"+"\n");
- 
+         
         }
      }
-    public static void subMenu() {
-        
-        
-    }
     @Override
-    public void time() {
-        
+    public void timer(int milliseconds) {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                timeOver = true;
+                timer.cancel(); // Terminar el task del timer
+            }
+        }, milliseconds);
     }
 
     @Override
