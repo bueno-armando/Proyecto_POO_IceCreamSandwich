@@ -106,7 +106,7 @@ public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
     public static int menuAddTeam(int indiceGlobal){
        
         Team[] numEquipos = new Team[100];
-        System.out.println("*****EQUIPO 1*****");
+        
         Scanner sc = new Scanner(System.in);
         do{
             try{
@@ -117,14 +117,13 @@ public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
             opcSelectTeam = sc.nextInt(); 
                 switch(opcSelectTeam){
                     case 1:
-                        System.out.println("**********EQUIPO 1:*********");
+                        
+                        System.out.println("**********EQUIPO 1**********");
                         //abrir o desplegar todos los equipos existentes (FILES CHOOSER) ABRIR ARCHIVOS
                         System.out.println("Abrir el archivo del equipo deseado");
                         System.out.println("Ingresar el nombre del archivo a cargar");
                         
                         sc.nextLine();//Consumir el carácter de nueva línea pendiente
-                                
-                   
                         String fileName = sc.nextLine();
                         
                         try{
@@ -134,29 +133,61 @@ public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
                           System.out.println("Equipo cargado:");
                           System.out.println("Nombre del equipo: " + loadedTeam.getTeamName());
                           // ...
+                          //Obtener jugadores cargados en el equipo(T
+                           Player[] playersCargados = loadedTeam.getPlayers();
+                          if(playersCargados != null && playersCargados.length>0){
+                              System.out.println("Jugadores cargados");
+                              for (Player players : playersCargados) {
+                                  System.out.println(
+                                          //"*******************************************************"
+                                          "\nNombre : "+players.getName()+" | "
+                                          +"Apellido: "+players.getLastName()+" | "
+                                          +"Posición: "+players.getPosition()+" | "
+                                          );                               
+                                }
+                            }else{
+                              System.out.println("El equipo no cuenta con ningún jugador cargado");
+                          }
+                          //
                         }catch(IOException ex){
                             System.out.println(ex.getMessage());
                         }catch(ClassNotFoundException ex){
                             System.out.println(ex.getMessage());
                         }
+                       
+                      
                         //////EQUIPO 2///////
-                        System.out.println("**********EQUIPO 2:*********\n");
+                        System.out.println("**********EQUIPO 2**********\n");
                         //abrir o desplegar todos los equipos existentes (FILES CHOOSER) ABRIR ARCHIVOS
                         System.out.println("Abrir el archivo del equipo deseado");
                         System.out.println("Ingresar el nombre del archivo a cargar");
-                        
-                        sc.nextLine();//Consumir el carácter de nueva línea pendiente
                                 
-                   
+                        sc.nextLine();//Consumir el carácter de nueva línea pendiente
                         String fileName2 = sc.nextLine();
                         
-                        try{
-                        Team loadedTeam = loadData(fileName2);
-                          // Aquí puedes realizar las operaciones necesarias con el equipo cargado
-                          // Por ejemplo, imprimir los detalles del equipo o acceder a sus jugadores
-                          System.out.println("Equipo cargado:");
-                          System.out.println("Nombre del equipo: " + loadedTeam.getTeamName());
-                          // ...
+                    try{
+                         Team loadedTeam = loadData(fileName2);
+                           // Aquí puedes realizar las operaciones necesarias con el equipo cargado
+                           // Por ejemplo, imprimir los detalles del equipo o acceder a sus jugadores
+                            System.out.println("Equipo cargado:");
+                            System.out.println("Nombre del equipo: " + loadedTeam.getTeamName());
+                           // ..
+                           //Obtener jugadores cargados en el equipo(T
+                           Player[] playersCargados = loadedTeam.getPlayers();
+                          if(playersCargados != null && playersCargados.length>0){
+                              System.out.println("Jugadores cargados");
+                              for (Player players : playersCargados) {
+                                  System.out.println(
+                                          "*************************************************"
+                                          +"\nNombre : "+players.getName()+"|"
+                                          +"Apellido: "+players.getLastName()+"|"
+                                          +"Posición: "+players.getPosition()+"|"
+                                          );                                    
+                                }
+                            }else{
+                              System.out.println("El equipo no cuenta con ningún jugador cargado");
+                          }
+                          
                         }catch(IOException ex){
                             System.out.println(ex.getMessage());
                         }catch(ClassNotFoundException ex){
@@ -206,7 +237,8 @@ public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
         System.out.println("Nombre del equipo: "+objEquipo[indice].getTeamName()+"\n");
         
         System.out.println("Agregar jugadores");
-        addPlayer();
+         addPlayer(CreatedTeam);
+        
         //Guardar el object
             saveData(CreatedTeam, fileName);
         } catch (IOException ex) {
@@ -233,9 +265,10 @@ public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
        
        return loadedTeam;
    }
-    public static void addPlayer(){
+
+    public static void addPlayer(Team CreatedTeam){
         Scanner sc = new Scanner(System.in);
-        Player [] players = new Player[5];
+        Player[] players = new Player [5];
         for (int i = 0; i < 5; i++) {
            
             players[i] = new Player();
@@ -266,11 +299,19 @@ public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
                }
            }while(!validInput);
              sc.nextLine();
-             System.out.println("*****************"+"\n");
-         
+
+            System.out.println(
+                    "________________"
+                    +"\nJugador #"+(i+1)
+                    +"\nnombre: "+players[i].getLastName()
+                    +"\nApellido: "+players[i].getLastName()
+                    +"\nPosición: "+players[i].getPosition()
+                    +"________________\n");
+            CreatedTeam.setPlayers(players);
         }
      }
- public static void addStats() {
+    
+    public static void addStats() {
     int foul = 0;
     int points = 0;
     int assists = 0;

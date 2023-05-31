@@ -8,10 +8,11 @@ import java.io.Serializable;
 public class Team implements Serializable {
     private String teamName;
     private int score;
-    private Player[] players; //has a
-    public Team(String teamName, int score) {
+    private Player []players; //has a
+    public Team(String teamName, int score,Player[]players) {
         this.teamName = teamName;
         this.score = score;
+        this.players = null;
     }
 
     public Team() {
@@ -33,6 +34,14 @@ public class Team implements Serializable {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public Player[] getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Player[] players) {
+        this.players = players;
     }
     
     
