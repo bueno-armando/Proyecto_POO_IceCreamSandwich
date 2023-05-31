@@ -1,11 +1,12 @@
 package SubClases;
 import Entities.*;
+import java.io.Serializable;
 
 /**
  *
  * @author IceCreamSandwich
  */
-public class Player extends Persona{
+public class Player extends Persona implements Serializable{
     private String position;
     private int number;
 

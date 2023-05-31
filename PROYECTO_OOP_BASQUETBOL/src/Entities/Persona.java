@@ -1,10 +1,12 @@
 package Entities;
 
+import java.io.Serializable;
+
 /**
  *
  * @author IceCreamSandwich
  */
-public abstract class Persona {
+public abstract class Persona implements Serializable{
     private String name;
     private String lastName;
     private int age;

@@ -1,10 +1,11 @@
 package Entities;
 import SubClases.*;
+import java.io.Serializable;
 /**
  *
  * @author IceCreamSandwich
  */
-public class Team {
+public class Team implements Serializable {
     private String teamName;
     private int score;
     private Player[] players; //has a

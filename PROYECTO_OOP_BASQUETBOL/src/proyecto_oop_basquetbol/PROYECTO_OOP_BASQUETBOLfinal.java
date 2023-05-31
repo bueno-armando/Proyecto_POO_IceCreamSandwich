@@ -17,75 +17,31 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
- *
+ * V2.6
  * @author IceCreamSandwich
  */
 public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
+    
     public static void main(String[] args) {
         System.out.println(mainMenu());
         
         
     }
     
-    public static boolean timeOver;
-    
-    public static void subMenu(){
-        Scanner sc = new Scanner(System.in);
-        char pick;
-        System.out.println("Selecciona una opcion\n+"
-                           +"(1)Agregar Stats\n"
-                           +"(2)Timer\n"
-                           +"(3)Quarter\n"
-                           +"(4)endGame\n");
-        while(true){
-            pick = sc.next().charAt(0);
-            switch(pick){
-                case '1':
-                    addStats();
-                    break;
-                case '2':
-                    //tiempo que va a correr el timer en ms
-                    //ms = minutos*6000
-                    timer(5000);
-                    break;
-                case '3':
-                    quarter();
-                    break;
-                case '4':
-                    endGame();
-                    System.out.println("**********************");
-                    System.out.println("      [MARCADOR]");
-                    System.out.println("**********************");
-                    pick = sc.next().charAt(0);
-                    if(pick == '1'){
-                        //regresar a menú
-                    }
-                    else{
-                        //salir
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-    
+    ///MENU PRINCIPAL para para elegir comenzar un juego o ver la estaditica
     public static int mainMenu(){
         int indiceEquipo=0;
-       
         do{
             try{
-                int x;
-                
+                int x; 
                 Scanner sc = new Scanner(System.in);
                 System.out.print("(1) Nuevo Juego\n");
                 System.out.println("(2) Ver Estadisticas");
-
                 x = sc.nextInt();
                 switch(x){
-                    case 1:
+                    case 1://se elige el el equipo y por consiguiente manda al sub
+                           // menu de agregar stats, timer, cuartos y end game 
                         menuAddTeam(indiceEquipo);
                         subMenu();
                         return x;
@@ -100,13 +56,14 @@ public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
             catch(InputMismatchException e){
                 System.out.println("Input no valido, intenta de nuevo");
             }
-        }while(true);         
-        
+        }while(true);                
     }
+    
+    //AGREGAR EQUIPO ya sea que agregues un equipo existente o para crear uno/s nuevo/s
     public static int menuAddTeam(int indiceGlobal){
        
         Team[] numEquipos = new Team[100];
-        
+        System.out.println("*****EQUIPO 1*****");
         Scanner sc = new Scanner(System.in);
         do{
             try{
@@ -117,13 +74,14 @@ public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
             opcSelectTeam = sc.nextInt(); 
                 switch(opcSelectTeam){
                     case 1:
-                        
-                        System.out.println("**********EQUIPO 1**********");
+                        System.out.println("**********EQUIPO 1:*********");
                         //abrir o desplegar todos los equipos existentes (FILES CHOOSER) ABRIR ARCHIVOS
                         System.out.println("Abrir el archivo del equipo deseado");
                         System.out.println("Ingresar el nombre del archivo a cargar");
                         
                         sc.nextLine();//Consumir el carácter de nueva línea pendiente
+                                
+                   
                         String fileName = sc.nextLine();
                         
                         try{
@@ -133,61 +91,29 @@ public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
                           System.out.println("Equipo cargado:");
                           System.out.println("Nombre del equipo: " + loadedTeam.getTeamName());
                           // ...
-                          //Obtener jugadores cargados en el equipo(T
-                           Player[] playersCargados = loadedTeam.getPlayers();
-                          if(playersCargados != null && playersCargados.length>0){
-                              System.out.println("Jugadores cargados");
-                              for (Player players : playersCargados) {
-                                  System.out.println(
-                                          //"*******************************************************"
-                                          "\nNombre : "+players.getName()+" | "
-                                          +"Apellido: "+players.getLastName()+" | "
-                                          +"Posición: "+players.getPosition()+" | "
-                                          );                               
-                                }
-                            }else{
-                              System.out.println("El equipo no cuenta con ningún jugador cargado");
-                          }
-                          //
                         }catch(IOException ex){
                             System.out.println(ex.getMessage());
                         }catch(ClassNotFoundException ex){
                             System.out.println(ex.getMessage());
                         }
-                       
-                      
                         //////EQUIPO 2///////
-                        System.out.println("**********EQUIPO 2**********\n");
+                        System.out.println("**********EQUIPO 2:*********\n");
                         //abrir o desplegar todos los equipos existentes (FILES CHOOSER) ABRIR ARCHIVOS
                         System.out.println("Abrir el archivo del equipo deseado");
                         System.out.println("Ingresar el nombre del archivo a cargar");
-                                
+                        
                         sc.nextLine();//Consumir el carácter de nueva línea pendiente
+                                
+                   
                         String fileName2 = sc.nextLine();
                         
-                    try{
-                         Team loadedTeam = loadData(fileName2);
-                           // Aquí puedes realizar las operaciones necesarias con el equipo cargado
-                           // Por ejemplo, imprimir los detalles del equipo o acceder a sus jugadores
-                            System.out.println("Equipo cargado:");
-                            System.out.println("Nombre del equipo: " + loadedTeam.getTeamName());
-                           // ..
-                           //Obtener jugadores cargados en el equipo(T
-                           Player[] playersCargados = loadedTeam.getPlayers();
-                          if(playersCargados != null && playersCargados.length>0){
-                              System.out.println("Jugadores cargados");
-                              for (Player players : playersCargados) {
-                                  System.out.println(
-                                          "*************************************************"
-                                          +"\nNombre : "+players.getName()+"|"
-                                          +"Apellido: "+players.getLastName()+"|"
-                                          +"Posición: "+players.getPosition()+"|"
-                                          );                                    
-                                }
-                            }else{
-                              System.out.println("El equipo no cuenta con ningún jugador cargado");
-                          }
-                          
+                        try{
+                        Team loadedTeam = loadData(fileName2);
+                          // Aquí puedes realizar las operaciones necesarias con el equipo cargado
+                          // Por ejemplo, imprimir los detalles del equipo o acceder a sus jugadores
+                          System.out.println("Equipo cargado:");
+                          System.out.println("Nombre del equipo: " + loadedTeam.getTeamName());
+                          // ...
                         }catch(IOException ex){
                             System.out.println(ex.getMessage());
                         }catch(ClassNotFoundException ex){
@@ -216,6 +142,7 @@ public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
      
         
     }
+    //Crea el equipo y sus jugadores
     public static void addTeam(int indice, Team[] objEquipo){
         try {
         Team CreatedTeam = new Team();//Crear una nueva instancia de Team
@@ -233,12 +160,11 @@ public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
         
         // Asignar el equipo creado al arreglo de equipos en la posición "indice"
         objEquipo[indice]= CreatedTeam;
-        System.out.println("Equipo agredado");
-        System.out.println("Nombre del equipo: "+objEquipo[indice].getTeamName()+"\n");
+        System.out.println("Equipo Agregado");
+        System.out.println("Nombre Del Equipo: "+objEquipo[indice].getTeamName()+"\n");
         
-        System.out.println("Agregar jugadores");
-         addPlayer(CreatedTeam);
-        
+        System.out.println("Agregar Jugadores");
+        addPlayer();
         //Guardar el object
             saveData(CreatedTeam, fileName);
         } catch (IOException ex) {
@@ -246,31 +172,11 @@ public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
         }
     
     }
-    public static void saveData(Team CreatedTeam, String fileName) throws IOException {
-         FileOutputStream fileOut = new FileOutputStream(fileName);
-        ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-        System.out.println("Se guardó exitosamente");
-        objectOut.writeObject(CreatedTeam);
-        fileOut.close();
-        objectOut.close();
-    }
-   
-    public static Team loadData( String fileName ) throws  IOException, ClassNotFoundException{
-       FileInputStream openFile = new FileInputStream(fileName);
-       ObjectInputStream oiStream = new ObjectInputStream(openFile);
-       Team loadedTeam = (Team) oiStream.readObject();
-       System.out.println("Se cargó exitosamente");
-       openFile.close();
-       oiStream.close();
-       
-       return loadedTeam;
-   }
-
-    public static void addPlayer(Team CreatedTeam){
+    public static void addPlayer(){
         Scanner sc = new Scanner(System.in);
-        Player[] players = new Player [5];
+        Player [] players = new Player[5];
         for (int i = 0; i < 5; i++) {
-           
+            System.out.println("JUGADOR #"+i+":\n");
             players[i] = new Player();
             System.out.println("Nombre: ");
             String name =sc.nextLine();
@@ -282,9 +188,7 @@ public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
             
              System.out.println("Posición");
             String position = sc.nextLine();
-            players[i].setPosition(position);
-            
-           
+            players[i].setPosition(position); 
             
           boolean validInput=false;
            do{
@@ -299,18 +203,80 @@ public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
                }
            }while(!validInput);
              sc.nextLine();
-
-            System.out.println(
-                    "________________"
-                    +"\nJugador #"+(i+1)
-                    +"\nnombre: "+players[i].getLastName()
-                    +"\nApellido: "+players[i].getLastName()
-                    +"\nPosición: "+players[i].getPosition()
-                    +"________________\n");
-            CreatedTeam.setPlayers(players);
+             System.out.println("*****************"+"\n");
+         
         }
      }
+    //Metodos para crear los equipos en formato bin (FILES)
+    public static void saveData(Team CreatedTeam, String fileName) throws IOException {
+         FileOutputStream fileOut = new FileOutputStream(fileName);
+        ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+        System.out.println("Se guardó exitosamente");
+        objectOut.writeObject(CreatedTeam);
+        fileOut.close();
+        objectOut.close();
+    }
+    public static Team loadData( String fileName ) throws  IOException, ClassNotFoundException{
+       FileInputStream openFile = new FileInputStream(fileName);
+       ObjectInputStream oiStream = new ObjectInputStream(openFile);
+       Team loadedTeam = (Team) oiStream.readObject();
+       System.out.println("Se cargó exitosamente");
+       openFile.close();
+       oiStream.close();
+       
+       return loadedTeam;
+   }
     
+    //SUBMENU despues de comenzar un juego  
+    public static void subMenu(){
+        
+        do{
+            try{
+                int xQuarter=0;
+                Scanner sc = new Scanner(System.in);
+                char pick;
+                System.out.println("Selecciona una opcion\n+"
+                                   +"(1)Agregar Stats\n"
+                                   +"(2)Timer\n"
+                                   +"(3)Quarter\n"
+                                   +"(4)endGame\n");
+                    pick = sc.next().charAt(0);
+                    switch(pick){
+                        case '1':
+                            addStats();
+                            break;
+                        case '2':
+                            //tiempo que va a correr el timer en ms
+                            //ms = minutos*6000
+                            timer(5000);
+                            break;
+                        case '3':
+                            quarter(xQuarter);
+                            break;
+                        case '4':
+                            endGame();
+                            System.out.println("**********************");
+                            System.out.println("      [MARCADOR]");
+                            System.out.println("**********************");
+                            System.out.println("(1)Volver a menu Principal\n"+"(presione cualquier otra tecla)Salir");
+                            pick = sc.next().charAt(0);
+                            if(pick == '1'){
+                                mainMenu();
+                            }
+                            else{
+                                //salir
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+             }
+            catch(InputMismatchException e){
+                System.out.println("Input no valido, intenta de nuevo");
+            }
+        }while(true);
+}
+    //
     public static void addStats() {
     int foul = 0;
     int points = 0;
@@ -366,8 +332,7 @@ public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
     // Call the 'marcador()' function to print the final results
     marcador(foul, assists, points, rebounds, blocks);
 }
-
-public static void marcador(int foul, int assists, int points, int rebounds, int blocks) {
+    public static void marcador(int foul, int assists, int points, int rebounds, int blocks) {
     System.out.println("----------RESULTADOS----------");
     System.out.println("Total de fouls: " + foul);
     System.out.println("Total de assists: " + assists);
@@ -375,8 +340,7 @@ public static void marcador(int foul, int assists, int points, int rebounds, int
     System.out.println("Total de rebounds: " + rebounds);
     System.out.println("Total de blocks: " + blocks);
 }
-
-
+    public static boolean timeOver;
     public static void timer(int milliseconds) {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -387,14 +351,15 @@ public static void marcador(int foul, int assists, int points, int rebounds, int
             }
         }, milliseconds);
     }
-
-    public static void quarter() {
-        
+    public static void quarter(int qtr) {
+        //qtr = numero de cuarto en el que van.
+        qtr++;
+        System.out.println("QTR "+qtr);
+        if(qtr>4){
+            System.out.println("EL JUEGO YA AH FINALIZADO");
+        }         
     }
-
     public static void endGame(){
-
-    }
- 
-   
+            System.out.println("TERMINO EL JUEGO");
+    } 
 }
