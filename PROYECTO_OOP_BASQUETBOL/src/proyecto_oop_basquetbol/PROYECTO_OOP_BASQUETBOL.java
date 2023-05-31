@@ -1,10 +1,15 @@
 package proyecto_oop_basquetbol;
 import Entities.*;
 import SubClases.Player;
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -17,7 +22,9 @@ public class PROYECTO_OOP_BASQUETBOL implements Utilities{
         
     }
     
+    //VARIABLES IMPORTANTES
     public static boolean timeOver;
+    private static JLabel countdownLabel;
     
     public void subMenu(){
         Scanner sc = new Scanner(System.in);
@@ -178,16 +185,38 @@ public class PROYECTO_OOP_BASQUETBOL implements Utilities{
      }
     @Override
     public void timer(int milliseconds) {
+        // Create and configure the countdown label
+        countdownLabel = new JLabel();
+        countdownLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        countdownLabel.setFont(new Font("Arial", Font.BOLD, 24));
+
+        // Create the main frame
+        JFrame frame = new JFrame("Countdown Timer");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 100);
+        frame.setLayout(new BorderLayout());
+        frame.add(countdownLabel, BorderLayout.CENTER);
+        frame.setVisible(true);
+
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
+            int seconds = milliseconds / 1000;
+
             @Override
             public void run() {
-                timeOver = true;
-                timer.cancel(); // Terminar el task del timer
+                if (seconds > 0) {
+                    int minutes = seconds / 60;
+                    int remainingSeconds = seconds % 60;
+                    countdownLabel.setText(String.format("%02d:%02d", minutes, remainingSeconds));
+                    seconds--;
+                } else {
+                    countdownLabel.setText("Program finished");
+                    timer.cancel(); // Terminate the timer task
+                }
             }
-        }, milliseconds);
+        }, 0, 1000); // Schedule the task to run every 1 second (1000 milliseconds)
     }
-
+    
     @Override
     public void stats() {
         

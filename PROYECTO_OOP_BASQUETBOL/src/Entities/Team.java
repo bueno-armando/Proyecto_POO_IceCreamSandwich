@@ -1,18 +1,16 @@
 package Entities;
 import SubClases.*;
-import java.io.Serializable;
 /**
  *
  * @author IceCreamSandwich
  */
-public class Team implements Serializable {
+public class Team {
     private String teamName;
     private int score;
-    private Player []players; //has a
-    public Team(String teamName, int score,Player[]players) {
+    private Player[] players; //has a
+    public Team(String teamName, int score) {
         this.teamName = teamName;
         this.score = score;
-        this.players = null;
     }
 
     public Team() {
@@ -34,14 +32,6 @@ public class Team implements Serializable {
 
     public void setScore(int score) {
         this.score = score;
-    }
-
-    public Player[] getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(Player[] players) {
-        this.players = players;
     }
     
     
