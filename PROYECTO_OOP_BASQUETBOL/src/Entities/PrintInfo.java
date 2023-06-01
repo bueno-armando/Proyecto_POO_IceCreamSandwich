@@ -1,5 +1,7 @@
 package Entities;
 
+import SubClases.Player;
+
 /**
  *
  * @author IceCreamSandwich

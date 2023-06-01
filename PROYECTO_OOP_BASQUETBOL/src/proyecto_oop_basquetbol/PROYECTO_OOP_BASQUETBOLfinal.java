@@ -21,10 +21,12 @@ import java.util.logging.Logger;
  * V2.6
  * @author IceCreamSandwich
  */
-public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
+public class PROYECTO_OOP_BASQUETBOLfinal{
     
     public static void main(String[] args) {
-        System.out.println(mainMenu());
+        Player p1 = new Player( "Jose", "Perez",22, "pg", 77,4,1,5,0,1 );
+        p1.printData();
+        //System.out.println(mainMenu());
         
         
     }
@@ -362,4 +364,5 @@ public class PROYECTO_OOP_BASQUETBOLfinal implements Utilities{
     public static void endGame(){
             System.out.println("TERMINO EL JUEGO");
     } 
+
 }
